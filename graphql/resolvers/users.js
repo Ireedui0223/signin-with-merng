@@ -69,12 +69,17 @@ module.exports = {
       );
       if (!valid) {
         //valid nohtsoliig hangaagui tohioldold aldaanii medeelel haruulna
-        throw new UserInputError("Errors", { errors }); // hereglechiin aldaag haruulah heseg
+        throw new UserInputError("Errors", { errors });
+        // hereglechiin aldaag haruulah heseg
       }
       //todo: make sure user doesnt already exists
-      const user = User.findOne({ userName }); //findone function ni mongoosiin function bogood tuhain nohtsoltoi niitsej baigaa tohiodold tuhain elementiig butsaadag herev negees olon utga butsah ym bol ehnii elementiig butsaana
+      const user = await User.findOne({ userName }); //findone function ni
+      //mongoosiin function bogood tuhain nohtsoltoi niitsej baigaa
+      //tohiodold tuhain elementiig butsaadag herev negees olon utga
+      //butsah ym bol ehnii elementiig butsaana
       if (user) {
-        //deerh function biyleed tuhain utga db dotroos oldvol aldaanii medeelel haruuulna
+        //deerh function biyleed tuhain utga db dotroos oldvol
+        //aldaanii medeelel haruuulna
         throw new UserInputError("UserName is taken", {
           //aldaanii medeelel haruulah heseg
           errors: {
