@@ -23,9 +23,17 @@ const {
   validateRegisterInput,
   validateLoginInput,
 } = require("../../util/validator");
+const checkAuth = require("../../util/check-auth");
 
 //mutation todorhoilson ni
 module.exports = {
+  Query: {
+    async currentUser(root, doc, context) {
+      const user = await checkAuth(context);
+      if (!user) return null;
+      return await User.findOne({ _id: user.id });
+    },
+  },
   Mutation: {
     //login mutation
     async login(_, { userName, password }) {

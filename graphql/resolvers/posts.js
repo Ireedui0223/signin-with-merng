@@ -60,7 +60,10 @@ module.exports = {
     },
 
     async likePost(_, { postId }, context) {
-      const { userName } = checkAuth(context);
+      const user = checkAuth(context);
+      if (!user) throw new Error("Заавал бүртгүүлэх шаардлагатай");
+      const { userName } = user;
+
       const post = await Post.findById(postId);
       if (post) {
         if (post.likes.find((like) => like.userName === userName)) {
